@@ -1,0 +1,16 @@
+{
+  "format": "aner.ev-map-browser-display/1",
+  "nativeSvgSHA256": "d8329ab104a326686c7b38ce1fa87139b61f1dbea6f0de54aa2a225a78ed73d7",
+  "displaySvgSHA256": "b3c1dd5ff3e7c9b54c8f9b926235111a4f37e1c34e26519fe950401a6887d02a",
+  "viewerHtmlSHA256": "85fd5bb65b37c05f61a6a88f949bedfe95f2727233f3e7d76d15a998e9d3c44e",
+  "inlineScriptSHA256": "nGaMCgADbIFdbwrNKPGksqGha6b4zloCc3zSOUWTzYw=",
+  "stations": 3224,
+  "counties": 39,
+  "presentationChanges": [
+    "neutral opaque county fills and thin internal borders",
+    "Washington footprint outline underlay from the same 39 county paths",
+    "remove context-only Regions N/A legend",
+    "clarify point color-scale title"
+  ],
+  "interaction": "Website browser viewer controls over native Aner SVG; analytical results and geometry are unchanged."
+}

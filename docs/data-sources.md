@@ -66,7 +66,7 @@ The display file retains the hash-pinned Aner `usa.wa.counties` catalogue's geom
 
 This file is **display geometry only**. The original, more detailed TIGERweb snapshot in `data/raw/census_counties.json.gz` remains the source used for station-to-county assignment and all retained county totals. The display update changes no station assignments, forecasts, ranks, or bootstrap samples. Shoreline-clipped display shapes are generalized thematic boundaries, rather than legal, navigation, or survey geometry.
 
-[The map source](../code/maps.aner) reads the bundled GeoJSON and station CSV directly. No optional map pack or remote tile service is required. Native exports are static SVG/HTML. The [website viewer](https://anerlang.org/applications/ev-charging/stations.html) adds local pan, zoom, county selection and station inspection; [its builder](https://github.com/abastias/AnerWeb/blob/codex/ev-application-publication/scripts/build-ev-map-viewer.mjs) and [browser controls](https://github.com/abastias/AnerWeb/blob/codex/ev-application-publication/scripts/ev-map-viewer.js) are maintained in the website repository.
+[The map source](../code/maps.aner) reads the bundled GeoJSON and station CSV directly. No optional map pack or remote tile service is required. Native exports are static SVG/HTML. The [website viewer](https://anerlang.org/applications/ev-charging/stations.html) adds local pan, zoom, county selection and station inspection. [The published display manifest](../evidence/map-browser-display-manifest.json) records the native map and browser presentation hashes.
 
 ### Renter context: `data/acs2024_wa.csv`
 

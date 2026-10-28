@@ -16,12 +16,12 @@
   "data_boundary": "curated frozen government inputs",
   "file_sha256": {
     ".gitignore": "33205478da3af8fb6b19a9b5248b4022c355bafd7ff270cab02c9429fd60a098",
-    "README.md": "52810d8a8808f7ae270dd0df7edaec7baec9c53628735e2433648b1dc059a9d2",
+    "README.md": "7a232d343fefe1dbc6be8c9836c741ef2cb73742af945fecfa3514f13e09c9c8",
     "assets/aner-logo-dark.svg": "92d55b4b0c11d969d1dde61ce9502045fa181b25a4b8618d450a9c806e991bbb",
     "assets/aner-logo.svg": "3f3c0a96699ff6e6a0d28222227e80bd91198d96f32a8bba1c8b5f23fdf6f030",
     "code/county_priorities.aner": "721eed3de7b5f4e3e28c837a954434466f5096c3d43b3c8ed9d9b89a7ac9878f",
     "code/ev_charging.aner": "848a4fd37f8ff3e1e08a4b65a10a8a9f5733fced157884af7577cfafd5827151",
-    "code/ev_charging.anernb": "00607856d234bbb6599f2477d6f31d8fd3719dbdad85d0c64016c3fb25b8101f",
+    "code/ev_charging.anernb": "521ec0901f650d8f3f7953705be7a5f91d875ab82d9f24e05f7a531d460b7c73",
     "code/maps.aner": "49de0ec79055385ba8b625bf68fedc4768c966d8889429e3488d8693c6c3c3ec",
     "data/acs2024_wa.csv": "20cd6cf190aca2bdc8b796ed9d841d3a968cc7b2e3157e29e06625557ed88001",
     "data/county_context.csv": "fafd8c3b3e7a91753f8750c76bf0694eb37d4dfa138a3273d1b6d783349d642f",
@@ -37,11 +37,11 @@
     "data/source_manifest.json": "f0c8a489c698bb41df9826ee897a287500ff21f82460d70287983c82940a399d",
     "data/station_county_audit.csv": "30a33f3a111d8b85d5bbd47c2aa73427f200fabefffea468cf94af6beefb9e5c",
     "data/stations.csv": "76f2637009432d0ba4f28abd74c99a582a772d5a740c34d2906f432b14d33b45",
-    "docs/data-sources.md": "6c4f0c7b3837ae6424cb9cec099cea06fd6143e5294f41ce01488e34c9d5a3f0",
-    "docs/methods.md": "90bfe03c17e02af9173e1b0c5b0f98baf012c842f4d34500806a038cb8fe27ba",
+    "docs/data-sources.md": "e4afe77cf439066d3b97d1c61af6e21d9558c6ea663e08fde9a1e11a99e691bb",
+    "docs/methods.md": "98ea9e8cff6e95ea61c9bbcfd4b5a42720dd3b17dff4c47c42524f60406754fe",
     "docs/output-columns.md": "c5493f1b3e18786767fbe3d601e0ef9e4aa646ef40423270ee5d096aaad7f2c5",
     "docs/research.md": "4978487f0969440bc63b910dd69ad6745933eb603f413d609275467962669d2e",
-    "evidence/README.md": "23585747f29a7ac62ddef671e97f55c4a6178cec6d9e8a76fa4940f7d85a9ba5",
+    "evidence/README.md": "d76f4b3a289c10fb2b5b657bf9ab9b5388e7a548aa608361ea0ffc14d12d3c9f",
     "evidence/bootstrap-53001.csv": "0fc53bad995ca8f535bd27c88b8ace80f13b0c312cdc35cad910e6a85b02a76d",
     "evidence/bootstrap-53003.csv": "f2cdd0f82bfba2c78d3b2c9045cf081c5d2089775b81e527b2303754dc5415c6",
     "evidence/bootstrap-53005.csv": "55b62bb4f059dcd53a87cca2c690fba56d8b08ac03ac962e1096aad0b2c867d4",
@@ -104,6 +104,7 @@
     "evidence/map-update-check.log": "a12b7cb43c9d9134b5bb1b35e9096b66775d9e92e7611d1cc92b02edd6782a87",
     "evidence/map-update.log": "272455245d3d4e12d02d26222a34afa11ff439e9383d07dd49983f93d115d93a",
     "evidence/stations-counties.svg": "d8329ab104a326686c7b38ce1fa87139b61f1dbea6f0de54aa2a225a78ed73d7",
-    "evidence/map-update-manifest.json": "89e97d59771d399f01fd12a23ba97b29df4a3e3fe188c0ab275017ce9483d533"
+    "evidence/map-update-manifest.json": "89e97d59771d399f01fd12a23ba97b29df4a3e3fe188c0ab275017ce9483d533",
+    "evidence/map-browser-display-manifest.json": "470bf805f4b17242fec3e733fda476b7f0f781f9d08e84b100caec9aa9884c63"
   }
 }
