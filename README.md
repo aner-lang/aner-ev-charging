@@ -1,17 +1,19 @@
-<a href="https://anerlang.org">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/aner-logo-dark.svg">
-    <img src="assets/aner-logo.svg" alt="Aner programming language" width="300">
-  </picture>
+<a href="https://anerlang.org#gh-dark-mode-only">
+  <img src="assets/aner-logo-dark.svg#gh-dark-mode-only" alt="Aner programming language" width="300">
+</a>
+<a href="https://anerlang.org#gh-light-mode-only">
+  <img src="assets/aner-logo.svg#gh-light-mode-only" alt="Aner programming language" width="300">
 </a>
 
 # Where should Washington invest in public EV charging next?
 
 An application of [Aner](https://anerlang.org), a programming language for data science and scientific computing. Use public observations to forecast county EV fleets, inspect charging pressure, and trace an investment shortlist back to its data and code.
 
-**Executable code in this repository is written in `.aner` and `.anernb`.** The remaining files are documentation, public data, images, and recorded evidence. The example runs from the included frozen CSV inputs without Python, a server, or an API key.
+**Executable code in this repository is written in `.aner` and `.anernb`.** The remaining files are documentation, public data, images, and recorded evidence. The example runs from the included frozen CSV inputs without a server or an API key.
 
 [Aner website](https://anerlang.org) · [Language documentation](https://anerlang.org/docs) · [Applications](https://anerlang.org/applications)
+
+Author: **Alfonso G. Bastias, Ph.D.**
 
 ## Three questions
 
@@ -85,7 +87,7 @@ docs/      Methods, source definitions, and open research
 evidence/  Recorded native outputs and verification manifests
 ```
 
-`generated/` is created locally for new outputs and is excluded from version control. No script folder, Python source, JavaScript source, runtime binaries, or private cluster settings is included in the public package.
+`generated/` is created locally for new outputs and is excluded from version control. Runtime binaries and private cluster settings are kept outside this repository.
 
 ## Interpretation and research
 
