@@ -1,0 +1,124 @@
+{
+  "format": "aner.ev-map-update/1",
+  "createdUTC": "2026-10-28T20:30:56.008Z",
+  "change": "Add shoreline-clipped Washington county geography to native station map; separate website viewer provides browser interaction.",
+  "analysisBoundary": "Display-only update. Frozen forecasts, county assignments, rankings, simulation samples and historical evaluation manifests remain unchanged.",
+  "runtime": {
+    "version": "Aner 0.0.4",
+    "binaryIdentity": "Aner 0.0.4\nTarget: macos-arm64\nCPU optimization: Apple silicon M1-M5 compatible\nCPU profile: compatible\nCPU instruction baseline: apple-m1\nRunning CPU: Apple M2 Max\nBuild configuration: Debug\nLink-time optimization: disabled\nCompiler: AppleClang 21.0.0.21000334\nNumerical CPU backend: Apple Accelerate (runtime CPU dispatch)\nC++ required baseline: C++20\nC++ active language mode: 202002\nC++ standard library: libc++ 220106\nC++20 feature-test observations: __cpp_lib_span=202002 __cpp_lib_bit_cast=201806 __cpp_lib_jthread=201911 __cpp_lib_atomic_wait=201907 __cpp_lib_atomic_ref=201806\nC++26 feature-test observations (current mode; 0=not advertised): __cpp_lib_simd=0 __cpp_lib_inplace_vector=0 __cpp_lib_senders=0 __cpp_impl_reflection=0 __cpp_contracts=0\nC++26 adoption: disabled; observations do not enable features",
+    "sha256": "2c9a7af315a8594eae8d53a0d673f222a9da82ce502a79251b69d10cf3a9d2f2"
+  },
+  "commands": [
+    {
+      "command": [
+        "aner",
+        "check",
+        "code/maps.aner",
+        "--strict-declarations"
+      ],
+      "returnCode": 0,
+      "log": {
+        "file": "evidence/map-update-check.log",
+        "sha256": "a12b7cb43c9d9134b5bb1b35e9096b66775d9e92e7611d1cc92b02edd6782a87",
+        "bytes": 3
+      }
+    },
+    {
+      "command": [
+        "aner",
+        "run",
+        "code/maps.aner",
+        "--max-steps",
+        "50000000"
+      ],
+      "returnCode": 0,
+      "log": {
+        "file": "evidence/map-update.log",
+        "sha256": "272455245d3d4e12d02d26222a34afa11ff439e9383d07dd49983f93d115d93a",
+        "bytes": 2084
+      }
+    }
+  ],
+  "source": {
+    "code/maps.aner": {
+      "sha256": "49de0ec79055385ba8b625bf68fedc4768c966d8889429e3488d8693c6c3c3ec",
+      "bytes": 2766
+    }
+  },
+  "inputs": {
+    "data/stations.csv": {
+      "sha256": "76f2637009432d0ba4f28abd74c99a582a772d5a740c34d2906f432b14d33b45",
+      "bytes": 189048
+    },
+    "data/wa-counties.geojson": {
+      "sha256": "7fb59693771c47c13c7708cc84afdfe779e6e40347eafadde313fea8aeb616e9",
+      "bytes": 466927
+    }
+  },
+  "outputs": {
+    "generated/stations.svg": {
+      "sha256": "d8329ab104a326686c7b38ce1fa87139b61f1dbea6f0de54aa2a225a78ed73d7",
+      "bytes": 1754213,
+      "retainedFile": "evidence/stations-counties.svg",
+      "kind": "Native SVG export, retained in this repository."
+    },
+    "generated/stations.html": {
+      "sha256": "528b42c17a891ed64eadb4c88670d438067348b9aee95a823136383c9a870f51",
+      "bytes": 1754769,
+      "kind": "Native static HTML export; generated locally only, not distributed. The website viewer is a separate presentation artifact."
+    }
+  },
+  "mapGeometry": {
+    "format": "aner.ev-map-display-geometry/1",
+    "sourceArchiveURL": "https://www2.census.gov/geo/tiger/GENZ2025/shp/cb_2025_us_county_500k.zip",
+    "sourceArchiveSHA256": "aa976c00b181939755d0da757f4c7c2dc0103c3b3b4530fb2a91c2bb62fc777c",
+    "sourceVintage": "2025",
+    "sourceGeometryCatalogue": "usa.wa.counties",
+    "sourceGeometrySHA256": "1760f06c0abda2b65e17b77d987159d7074b6ea1ac765b5181f8e96a86204429",
+    "sourceGeometryBytes": 466043,
+    "preparation": "Select the 39 Washington county cartographic geometries; retain geometry coordinates unchanged from the hash-pinned Aner catalogue; rename code to GEOID; attach names/centroids from retained county source. Source metadata retained; no analytical county assignment is recomputed.",
+    "sourceGeometryPreparation": {
+      "simplification": "Shapely coverage_simplify (Visvalingam-Whyatt), shared edges preserved",
+      "toleranceDegrees": 0.0001,
+      "coordinateTransform": "EPSG:4269 to EPSG:4326; always_xy; PROJ network disabled; generalized cartographic use"
+    },
+    "displayFile": "data/wa-counties.geojson",
+    "displaySHA256": "7fb59693771c47c13c7708cc84afdfe779e6e40347eafadde313fea8aeb616e9",
+    "displayBytes": 466927,
+    "featureCount": 39,
+    "coordinateCount": 19274,
+    "assignmentGeometry": {
+      "file": "data/raw/census_counties.json.gz",
+      "uncompressedSHA256": "f05ec8d392757bc3b2c25be78c0215eed20beac8b52976b00c21acd7ed956d60",
+      "use": "Original station-to-county assignment remains unchanged; cartographic display boundaries are not used for that analysis."
+    }
+  },
+  "verification": {
+    "countyFeatureCount": 39,
+    "geographicPointCount": 3224,
+    "allCountyFIPSMatch": true,
+    "coordinateCount": 19274,
+    "pointLabels": "none",
+    "countyLabels": [
+      "King County",
+      "Douglas County"
+    ],
+    "displayTheme": "light",
+    "projection": "lambert_azimuthal_equal_area",
+    "extent": {
+      "west": -124.9,
+      "south": 45.4,
+      "east": -116.8,
+      "north": 49.1
+    },
+    "nativeOrdinaryGeographicHTMLInteractive": false,
+    "requiresOptionalMapPack": false,
+    "requiresRemoteMapTiles": false
+  },
+  "websiteViewer": {
+    "url": "https://anerlang.org/applications/ev-charging/stations.html",
+    "builderSource": "https://github.com/abastias/AnerWeb/blob/codex/ev-application-publication/scripts/build-ev-map-viewer.mjs",
+    "browserControlsSource": "https://github.com/abastias/AnerWeb/blob/codex/ev-application-publication/scripts/ev-map-viewer.js",
+    "role": "Local browser interaction and presentation around the native SVG; no analysis rerun, remote tiles, or map pack required."
+  }
+}

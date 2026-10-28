@@ -1,4 +1,5 @@
-// Real station coordinates and port counts; no optional map pack is required.
+// Frozen government station observations over generalized Census county boundaries.
+// No map pack, tile server or network connection is required.
 import aner.data
 import aner.plot
 import aner.geo
@@ -30,16 +31,23 @@ while row < data.rows(stations) {
     }
     row += 1
 }
-let chart = plot.geo_scatter(positions: positions, values: ports, labels: labels)
+// County polygons are display context; no county value is encoded by their fill.
+// The original Census snapshot remains authoritative for station county assignment.
+let boundaries = plot.geojson("data/wa-counties.geojson")
+let chart = plot.choropleth(geojson: boundaries, property: "GEOID",
+        keys: List(), values: List())
+    .add_points(positions: positions, values: ports, labels: labels)
     .point_sizes(values: ports, max_radius: 7.0)
-    .point_labels("avoid")
+    .point_labels("none")
     .extent(west: -124.9, south: 45.4, east: -116.8, north: 49.1)
     .projection("lambert_azimuthal_equal_area")
-    .size(width: 1000, height: 650)
-    .title("Washington public charging: observed ports")
-    .caption("AFDC snapshot: public sites listed available. Combined L2 and DC counts show inventory, not interchangeable capacity. Unknown counts omitted. Coordinates are not road travel times.")
+    .annotate(x: -121.8360321, y: 47.4908756, text: "King County")
+    .annotate(x: -119.6934396, y: 47.7357217, text: "Douglas County")
+    .size(width: 1200, height: 780)
+    .theme(plot.theme("light"))
+    .title("Washington public EV charging")
+    .caption("AFDC inventory: 28 Oct 2026. Boundaries: U.S. Census 2025, shoreline-clipped cartographic display. Circle area = listed L2 + DC ports; inventory is not interchangeable capacity or measured use. County fill is context only.")
 chart.save("generated/stations.svg")
+// Ordinary geographic HTML exports retain the native static view.
+// The application website adds local pan, zoom and county/station inspection.
 chart.save("generated/stations.html")
-
-// Optional county boundaries: install usa.wa and use five-digit county FIPS keys.
-// plot.map("usa.wa.counties", keys: county_fips, values: pressure).show()

@@ -33,7 +33,7 @@ A transparent 24-month drift baseline projects **332,818.5 registered EVs in Sep
 
 Start with [the forecast program](code/ev_charging.aner), [native county ranking](code/county_priorities.aner), [station maps](code/maps.aner), or [the Aner notebook](code/ev_charging.anernb).
 
-This case was tested with the local **Aner 0.0.4 development runtime, Debug build**, identified in [the run manifest](evidence/run-manifest.json). It requires the typed CSV/provenance, Date/Result, parallel seed/value/CSV-export, and geographic-export APIs used by these sources. Compatibility with the published downloads has not been separately verified; a shared version number does not establish identical capabilities. Start with the current [downloads](https://anerlang.org/downloads) and [documentation](https://anerlang.org/docs), then strict-check all three programs with a runtime providing those APIs.
+This case was tested with the local **Aner 0.0.4 development runtime, Debug build**, identified in [the original run manifest](evidence/run-manifest.json) and [the map-update manifest](evidence/map-update-manifest.json). It requires the typed CSV/provenance, Date/Result, parallel seed/value/CSV-export, and geographic-export APIs used by these sources. Compatibility with the published downloads has not been separately verified; a shared version number does not establish identical capabilities. Start with the current [downloads](https://anerlang.org/downloads) and [documentation](https://anerlang.org/docs), then strict-check all three programs with a runtime providing those APIs.
 
 Run from the repository root, where `data/` and `code/` are visible:
 
@@ -49,14 +49,16 @@ aner run code/maps.aner --max-steps 50000000
 
 Use a **fresh `generated/` directory** for each run; native exports refuse to overwrite existing files. The checked runtime identity and source/input/output hashes are retained in [the evaluation manifest](evidence/evaluation-manifest.json). Binaries sharing a version string can differ in development capabilities; use the recorded identity and the current language documentation when checking compatibility. The runtime itself is not included in this repository.
 
-The notebook in `code/` presents the workflow with explanatory cells and the same checked source. The CLI runs `.aner` files; `.anernb` opens in a compatible Aner notebook editor and uses its configured execution limits. Open it from the repository workspace so its relative CSV paths resolve from the repository root. Recorded results live in `evidence/`; newly generated results are kept separate.
+Running `maps.aner` exports static SVG and HTML views using the bundled [2025 shoreline-clipped county display geometry](data/wa-counties.geojson) and frozen station CSV. No optional map pack is required. The [website station viewer](https://anerlang.org/applications/ev-charging/stations.html) adds browser pan, zoom, and county/station selection; its [builder](https://github.com/abastias/AnerWeb/blob/codex/ev-application-publication/scripts/build-ev-map-viewer.mjs) and [browser controls](https://github.com/abastias/AnerWeb/blob/codex/ev-application-publication/scripts/ev-map-viewer.js) live in the website repository. [The map-update manifest](evidence/map-update-manifest.json) binds the updated source, display geometry, native logs, and [native county map](evidence/stations-counties.svg). The original forecast and ranking evaluation remains frozen.
+
+The notebook in `code/` presents the workflow with explanatory cells and the same checked forecast source. The CLI runs `.aner` files; `.anernb` opens in a compatible Aner notebook editor and uses its configured execution limits. Open it from the repository workspace so its relative CSV paths resolve from the repository root. Recorded results live in `evidence/`; newly generated results are kept separate.
 
 ## What the native programs demonstrate
 
 - **Typed transformations:** bounded CSV ingestion and immutable county filtering with native provenance and execution receipts.
 - **Parallel computation:** independent moving-block bootstrap tasks, declared seeds, ordered samples, and one-versus-four-worker verification.
 - **Decision rules:** percentile normalization, explicit growth multipliers and renter weights, county ranks, and a separate flag for zero-port counties.
-- **Maps:** actual station positions exported through Aner Plot without a required map pack. Optional county boundaries use the appropriate installed pack.
+- **Maps:** actual station positions over bundled Washington county boundaries, exported through Aner Plot without an optional map pack. Native SVG/HTML are static; the website viewer adds browser interaction.
 - **Traceability:** county identifiers, upstream snapshot hashes, runtime identity, code, parameters, receipts, samples, and derived results stay inspectable.
 
 The parallel boundary is visible in the source:
@@ -82,7 +84,7 @@ Inputs are **curated government snapshots**. The Aner example starts at typed CS
 ```text
 code/       Aner programs and an Aner notebook
 assets/     Official Aner logo variants
-data/      Frozen CSV inputs, policy records, provenance, raw data snapshots
+data/      Frozen CSV inputs, display GeoJSON, policy records, provenance, raw snapshots
 docs/      Methods, source definitions, and open research
 evidence/  Recorded native outputs and verification manifests
 ```

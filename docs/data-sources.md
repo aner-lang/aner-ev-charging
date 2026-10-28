@@ -14,7 +14,7 @@ The study snapshot was collected on **28 October 2026**. Monthly fleet observati
 | [US Census TIGERweb State/County service](https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1) | Washington county geometry and geographic identifiers, EPSG:4326 output | `f05ec8d392757bc3b2c25be78c0215eed20beac8b52976b00c21acd7ed956d60` |
 | [US Census ACS table B25003: housing tenure](https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat) | 2020–2024 five-year estimates; Washington counties | `68e963e1ed60fcf6b0658579cefc6498b7a9eb780b9f3e87fd1b9775c4d4ac6c` |
 
-These hashes identify the **original, uncompressed download bytes**. When an upstream download is retained as `data/raw/<name>.gz`, decompress it before comparing its content hash. The gzip container has a different hash. [The source manifest](../data/source_manifest.json) preserves the exact URLs, query parameters, byte counts, retrieval timestamps, transformations, coverage, and prepared-table hashes. It is the authoritative download record for this snapshot.
+These hashes identify the **original, uncompressed download bytes**. When an upstream download is retained as `data/raw/<name>.gz`, decompress it before comparing its content hash. The gzip container has a different hash. [The source manifest](../data/source_manifest.json) preserves the exact URLs, query parameters, byte counts, retrieval timestamps, transformations, coverage, and prepared-table hashes. It is the authoritative download record for the original analytical snapshot. The later cartographic display update has a separate [map-update manifest](../evidence/map-update-manifest.json).
 
 An upstream portal can revise its records. Downloading the same URL later does not necessarily reproduce these bytes. A refreshed collection is a new source vintage and should receive a new manifest and evaluation.
 
@@ -57,6 +57,16 @@ The official [AFDC state-download page](https://afdc.energy.gov/corridors) also 
 Station longitude and latitude are assigned to official Census county polygons in EPSG:4326, with polygon holes and multipart geometry respected. The preparation requires exactly one county match for every retained station. The frozen study has **no unmatched station records**; it does not silently assign an unmatched point to the nearest county.
 
 The audit table preserves each station ID, assigned county FIPS, last-confirmed date, listed status, and restricted-access flag. County totals in `data/county_context.csv` are sums of the matched station-level port records. County boundaries are administrative study units; they do not measure road access, travel time, or cross-boundary charging.
+
+### Cartographic display: `data/wa-counties.geojson`
+
+The station map uses **2025 U.S. Census shoreline-clipped cartographic county boundaries**, bundled as a small GeoJSON file. It includes all 39 Washington county FIPS keys. The [national 1:500,000 county source archive](https://www2.census.gov/geo/tiger/GENZ2025/shp/cb_2025_us_county_500k.zip) has SHA-256 `aa976c00b181939755d0da757f4c7c2dc0103c3b3b4530fb2a91c2bb62fc777c`. These boundaries make the coastline and county divisions visible; source vintage is separate from the October 2026 station inventory.
+
+The display file retains the hash-pinned Aner `usa.wa.counties` catalogue's geometry coordinates. Its authoring recipe uses shared-edge-preserving Visvalingam–Whyatt coverage simplification with a **0.0001° tolerance** and an offline EPSG:4269-to-EPSG:4326 transform. The case preparation renames the catalogue's five-digit `code` property to `GEOID` and attaches names and centroids from the retained county source; it does not change geometry coordinates. The [map-update manifest](../evidence/map-update-manifest.json) records the archive, catalogue, display-file, source, runtime, and export hashes.
+
+This file is **display geometry only**. The original, more detailed TIGERweb snapshot in `data/raw/census_counties.json.gz` remains the source used for station-to-county assignment and all retained county totals. The display update changes no station assignments, forecasts, ranks, or bootstrap samples. Shoreline-clipped display shapes are generalized thematic boundaries, rather than legal, navigation, or survey geometry.
+
+[The map source](../code/maps.aner) reads the bundled GeoJSON and station CSV directly. No optional map pack or remote tile service is required. Native exports are static SVG/HTML. The [website viewer](https://anerlang.org/applications/ev-charging/stations.html) adds local pan, zoom, county selection and station inspection; [its builder](https://github.com/abastias/AnerWeb/blob/codex/ev-application-publication/scripts/build-ev-map-viewer.mjs) and [browser controls](https://github.com/abastias/AnerWeb/blob/codex/ev-application-publication/scripts/ev-map-viewer.js) are maintained in the website repository.
 
 ### Renter context: `data/acs2024_wa.csv`
 
