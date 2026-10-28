@@ -1,0 +1,190 @@
+// Run after ev_charging.aner, from the repository root.
+// Ranking expresses declared planning preferences; it is not a learned optimum.
+import aner.data
+import aner.parallel
+
+fn require(condition: Bool, message: String) -> Unit {
+    if condition { return }
+    print("INPUT_ERROR: " + message)
+    let rejected: Result<Bool, String> = Result.err(message)
+    let rejected_input = rejected.unwrap()
+}
+
+fn numeric_fips(code: String) -> Int64 {
+    var value = 0
+    var digit = 0
+    while digit < code.len() {
+        let parsed_digit = "0123456789".find(code.get(digit))
+        require(parsed_digit >= 0, "FIPS must contain only decimal digits")
+        value = 10 * value + parsed_digit
+        digit += 1
+    }
+    return value
+}
+
+fn percentile(values: List, index: Int64) -> Float64 {
+    let value = cast<Float64>(values.get(index))
+    var less = 0
+    var equal = 0
+    var other = 0
+    while other < values.len() {
+        let candidate = cast<Float64>(values.get(other))
+        if candidate < value { less += 1 }
+        if candidate == value { equal += 1 }
+        other += 1
+    }
+    return (Float64(less) + 0.5 * Float64(equal - 1)) / Float64(values.len() - 1)
+}
+
+// Native numeric CSV export: iteration/seed are transport metadata, not predictors.
+fn export_row(parameters: List, iteration: Int64, seed: Int64) -> List {
+    return cast<List>(parameters.get(iteration))
+}
+
+var forecast_schema = data.schema()
+forecast_schema = data.column(forecast_schema, "iteration", "Int64", false)
+forecast_schema = data.column(forecast_schema, "seed", "String", false)
+var column = 0
+while column < 12 {
+    forecast_schema = data.column(forecast_schema, "value_" + String(column), "Float64", false)
+    column += 1
+}
+let forecasts = data.collect(data.scan_csv("generated/county-forecasts.csv", forecast_schema, "NA"),
+    max_rows: 39, max_bytes: 1048576, batch_rows: 64)
+print(data.provenance(forecasts))
+var context_schema = data.schema()
+context_schema = data.column(context_schema, "county_fips", "String", false)
+context_schema = data.column(context_schema, "county", "String", false)
+context_schema = data.column(context_schema, "latitude", "Float64", false)
+context_schema = data.column(context_schema, "longitude", "Float64", false)
+context_schema = data.column(context_schema, "public_l2_ports", "Int64", false)
+context_schema = data.column(context_schema, "public_dc_ports", "Int64", false)
+context_schema = data.column(context_schema, "renter_share", "Float64", false)
+let counties = data.collect(data.scan_csv("data/county_context.csv", context_schema, "NA"),
+    max_rows: 39, max_bytes: 1048576, batch_rows: 64)
+print(data.provenance(counties))
+require(data.rows(forecasts) == 39 && data.rows(counties) == 39, "Expected 39 matched county forecasts")
+
+let finite = List()
+let renter_values = List()
+let best = List()
+let worst = List()
+let top10 = List()
+var county = 0
+while county < data.rows(counties) {
+    require(data.integer(forecasts, county, "iteration") == county &&
+        data.number(forecasts, county, "value_0") == Float64(numeric_fips(data.text(counties, county, "county_fips"))),
+        "Forecast rows must retain sorted county identities")
+    require(data.number(forecasts, county, "value_9") == Float64(data.integer(counties, county, "public_l2_ports")) &&
+        data.number(forecasts, county, "value_10") == Float64(data.integer(counties, county, "public_dc_ports")) &&
+        data.number(forecasts, county, "value_11") == data.number(counties, county, "renter_share"),
+        "Context must match the context used by the native forecast")
+    if data.integer(counties, county, "public_l2_ports") > 0 {
+        finite.append(county)
+        renter_values.append(data.number(counties, county, "renter_share"))
+        best.append(39)
+        worst.append(0)
+        top10.append(0)
+    } else {
+        print("ZERO_L2," + data.text(counties, county, "county_fips") + "," +
+            data.text(counties, county, "county") + ",investigate separately; undefined ratio")
+    }
+    county += 1
+}
+require(finite.len() > 1, "Percentile ranking requires at least two positive-L2 counties")
+let scenario_rows = List()
+let growths = List(0.75, 1.0, 1.25)
+let weights = List(0.0, 0.25, 0.5)
+print("SCENARIO,county_fips,county,growth_multiplier,renter_weight,projected_ev,l2_ports,ev_per_l2,pressure_percentile,renter_percentile,score,rank")
+var g = 0
+while g < growths.len() {
+    let growth = cast<Float64>(growths.get(g))
+    let pressures = List()
+    let projected = List()
+    var candidate = 0
+    while candidate < finite.len() {
+        let index = cast<Int64>(finite.get(candidate))
+        let observed = data.number(forecasts, index, "value_1")
+        let forecast = data.number(forecasts, index, "value_2")
+        var stock = observed + growth * (forecast - observed)
+        if stock < 0.0 { stock = 0.0 }
+        projected.append(stock)
+        pressures.append(stock / Float64(data.integer(counties, index, "public_l2_ports")))
+        candidate += 1
+    }
+    var w = 0
+    while w < weights.len() {
+        let weight = cast<Float64>(weights.get(w))
+        let scores = List()
+        candidate = 0
+        while candidate < finite.len() {
+            scores.append((1.0 - weight) * percentile(pressures, candidate) +
+                weight * percentile(renter_values, candidate))
+            candidate += 1
+        }
+        candidate = 0
+        while candidate < finite.len() {
+            let index = cast<Int64>(finite.get(candidate))
+            let score = cast<Float64>(scores.get(candidate))
+            var rank = 1
+            var other = 0
+            while other < finite.len() {
+                let other_score = cast<Float64>(scores.get(other))
+                // Context is sorted by FIPS; lower index is the deterministic tie breaker.
+                if other_score > score || (other_score == score && other < candidate) { rank += 1 }
+                other += 1
+            }
+            if rank < cast<Int64>(best.get(candidate)) { best.set(candidate, rank) }
+            if rank > cast<Int64>(worst.get(candidate)) { worst.set(candidate, rank) }
+            if rank <= 10 { top10.set(candidate, cast<Int64>(top10.get(candidate)) + 1) }
+            let fips = data.text(counties, index, "county_fips")
+            let l2 = data.integer(counties, index, "public_l2_ports")
+            let pressure = cast<Float64>(pressures.get(candidate))
+            let stock = cast<Float64>(projected.get(candidate))
+            let p = percentile(pressures, candidate)
+            let r = percentile(renter_values, candidate)
+            scenario_rows.append(List(numeric_fips(fips), growth, weight, stock, l2, pressure, p, r, score, rank))
+            print("SCENARIO," + fips + "," + data.text(counties, index, "county") + "," +
+                String(growth) + "," + String(weight) + "," + String(stock) + "," + String(l2) + "," +
+                String(pressure) + "," + String(p) + "," + String(r) + "," + String(score) + "," + String(rank))
+            candidate += 1
+        }
+        w += 1
+    }
+    g += 1
+}
+let scenarios = parallel.repeat(iterations: scenario_rows.len(), task: export_row,
+    parameters: scenario_rows, execution: parallel.local(workers: 1), seed: 20261028,
+    max_bytes: 1048576)
+scenarios.save_csv("generated/scenario-ranks.csv")
+print(scenarios.summary())
+
+let priority_rows = List()
+print("PRIORITY,county_fips,county,observed_ev,projected_ev,l2_ports,dc_ports,renter_share,ev_per_l2,best_rank,worst_rank,top10_scenarios,scenario_count")
+var candidate = 0
+while candidate < finite.len() {
+    let index = cast<Int64>(finite.get(candidate))
+    let fips = data.text(counties, index, "county_fips")
+    let observed = data.number(forecasts, index, "value_1")
+    let forecast = data.number(forecasts, index, "value_2")
+    let l2 = data.integer(counties, index, "public_l2_ports")
+    let dc = data.integer(counties, index, "public_dc_ports")
+    let renters = data.number(counties, index, "renter_share")
+    let min_rank = cast<Int64>(best.get(candidate))
+    let max_rank = cast<Int64>(worst.get(candidate))
+    let appearances = cast<Int64>(top10.get(candidate))
+    let pressure = forecast / Float64(l2)
+    priority_rows.append(List(numeric_fips(fips), observed, forecast, l2, dc, renters, pressure,
+        min_rank, max_rank, appearances, 9))
+    print("PRIORITY," + fips + "," + data.text(counties, index, "county") + "," +
+        String(observed) + "," + String(forecast) + "," + String(l2) + "," + String(dc) + "," +
+        String(renters) + "," + String(pressure) + "," + String(min_rank) + "," + String(max_rank) + "," +
+        String(appearances) + ",9")
+    if appearances == 9 { print("STABLE," + fips + "," + data.text(counties, index, "county")) }
+    candidate += 1
+}
+let priorities = parallel.repeat(iterations: priority_rows.len(), task: export_row,
+    parameters: priority_rows, execution: parallel.local(workers: 1), seed: 20261028,
+    max_bytes: 1048576)
+priorities.save_csv("generated/county-priorities.csv")
+print(priorities.summary())

@@ -1,0 +1,28 @@
+{
+  "format": "aner.ev-native-verification/1",
+  "status": "passed",
+  "analysis_language": "Aner",
+  "county_count": 39,
+  "scenario_count": 9,
+  "scenario_county_rows": 342,
+  "distinct_top10_rankings": 3,
+  "stable_counties": [
+    "Cowlitz",
+    "Douglas",
+    "Grant",
+    "Kitsap",
+    "Snohomish",
+    "Thurston"
+  ],
+  "native_replay_paths": 39000,
+  "native_replay_values": 117000,
+  "native_replay_seeds": 39000,
+  "ordered_sample_csv_byte_identical_to_retained_reference": true,
+  "county_forecasts_and_all_scenario_ranks_match_retained_reference": true,
+  "notebook_source_matches_checked_program": true,
+  "notebook_recorded_outputs_empty": true,
+  "public_executable_extensions": [
+    ".aner",
+    ".anernb"
+  ]
+}

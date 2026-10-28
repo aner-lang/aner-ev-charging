@@ -1,0 +1,16 @@
+Aner 0.0.4
+Target: macos-arm64
+CPU optimization: Apple silicon M1-M5 compatible
+CPU profile: compatible
+CPU instruction baseline: apple-m1
+Running CPU: Apple M2 Max
+Build configuration: Debug
+Link-time optimization: disabled
+Compiler: AppleClang 21.0.0.21000334
+Numerical CPU backend: Apple Accelerate (runtime CPU dispatch)
+C++ required baseline: C++20
+C++ active language mode: 202002
+C++ standard library: libc++ 220106
+C++20 feature-test observations: __cpp_lib_span=202002 __cpp_lib_bit_cast=201806 __cpp_lib_jthread=201911 __cpp_lib_atomic_wait=201907 __cpp_lib_atomic_ref=201806
+C++26 feature-test observations (current mode; 0=not advertised): __cpp_lib_simd=0 __cpp_lib_inplace_vector=0 __cpp_lib_senders=0 __cpp_impl_reflection=0 __cpp_contracts=0
+C++26 adoption: disabled; observations do not enable features

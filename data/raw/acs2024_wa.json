@@ -1,0 +1,353 @@
+[
+  {
+    "county_fips": "53001",
+    "occupied_units": 6288,
+    "occupied_moe": 162,
+    "renter_units": 1930,
+    "renter_moe": 271,
+    "renter_share": 0.30693384223918574,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53003",
+    "occupied_units": 9490,
+    "occupied_moe": 221,
+    "renter_units": 2540,
+    "renter_moe": 291,
+    "renter_share": 0.26765015806111697,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53005",
+    "occupied_units": 78046,
+    "occupied_moe": 560,
+    "renter_units": 25267,
+    "renter_moe": 973,
+    "renter_share": 0.3237449709145888,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53007",
+    "occupied_units": 31520,
+    "occupied_moe": 492,
+    "renter_units": 11157,
+    "renter_moe": 810,
+    "renter_share": 0.35396573604060916,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53009",
+    "occupied_units": 35046,
+    "occupied_moe": 426,
+    "renter_units": 9209,
+    "renter_moe": 615,
+    "renter_share": 0.26276893226045767,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53011",
+    "occupied_units": 196017,
+    "occupied_moe": 823,
+    "renter_units": 65952,
+    "renter_moe": 1312,
+    "renter_share": 0.3364606131100874,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53013",
+    "occupied_units": 1862,
+    "occupied_moe": 136,
+    "renter_units": 415,
+    "renter_moe": 126,
+    "renter_share": 0.22287862513426424,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53015",
+    "occupied_units": 43943,
+    "occupied_moe": 449,
+    "renter_units": 14067,
+    "renter_moe": 705,
+    "renter_share": 0.32011924538606834,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53017",
+    "occupied_units": 15923,
+    "occupied_moe": 330,
+    "renter_units": 4892,
+    "renter_moe": 440,
+    "renter_share": 0.30722853733592914,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53019",
+    "occupied_units": 3169,
+    "occupied_moe": 137,
+    "renter_units": 694,
+    "renter_moe": 125,
+    "renter_share": 0.21899652887346166,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53021",
+    "occupied_units": 29890,
+    "occupied_moe": 470,
+    "renter_units": 8681,
+    "renter_moe": 667,
+    "renter_share": 0.2904315824690532,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53023",
+    "occupied_units": 1031,
+    "occupied_moe": 87,
+    "renter_units": 238,
+    "renter_moe": 66,
+    "renter_share": 0.23084384093113483,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53025",
+    "occupied_units": 35398,
+    "occupied_moe": 515,
+    "renter_units": 11937,
+    "renter_moe": 928,
+    "renter_share": 0.33722244194587264,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53027",
+    "occupied_units": 30628,
+    "occupied_moe": 562,
+    "renter_units": 8204,
+    "renter_moe": 576,
+    "renter_share": 0.267859474990205,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53029",
+    "occupied_units": 35972,
+    "occupied_moe": 647,
+    "renter_units": 9084,
+    "renter_moe": 562,
+    "renter_share": 0.2525297453575003,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53031",
+    "occupied_units": 16340,
+    "occupied_moe": 415,
+    "renter_units": 3424,
+    "renter_moe": 406,
+    "renter_share": 0.209547123623011,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53033",
+    "occupied_units": 941054,
+    "occupied_moe": 2581,
+    "renter_units": 419249,
+    "renter_moe": 3837,
+    "renter_share": 0.44551003449323845,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53035",
+    "occupied_units": 108537,
+    "occupied_moe": 829,
+    "renter_units": 32416,
+    "renter_moe": 1250,
+    "renter_share": 0.2986631287026544,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53037",
+    "occupied_units": 19993,
+    "occupied_moe": 500,
+    "renter_units": 7699,
+    "renter_moe": 532,
+    "renter_share": 0.3850847796728855,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53039",
+    "occupied_units": 9872,
+    "occupied_moe": 221,
+    "renter_units": 2303,
+    "renter_moe": 252,
+    "renter_share": 0.23328606158833062,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53041",
+    "occupied_units": 32916,
+    "occupied_moe": 435,
+    "renter_units": 7978,
+    "renter_moe": 509,
+    "renter_share": 0.24237452910438692,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53043",
+    "occupied_units": 4820,
+    "occupied_moe": 149,
+    "renter_units": 946,
+    "renter_moe": 126,
+    "renter_share": 0.1962655601659751,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53045",
+    "occupied_units": 26029,
+    "occupied_moe": 620,
+    "renter_units": 4603,
+    "renter_moe": 546,
+    "renter_share": 0.1768412155672519,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53047",
+    "occupied_units": 17540,
+    "occupied_moe": 446,
+    "renter_units": 4842,
+    "renter_moe": 401,
+    "renter_share": 0.276054732041049,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53049",
+    "occupied_units": 10977,
+    "occupied_moe": 428,
+    "renter_units": 1997,
+    "renter_moe": 275,
+    "renter_share": 0.18192584494852873,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53051",
+    "occupied_units": 5949,
+    "occupied_moe": 220,
+    "renter_units": 1141,
+    "renter_moe": 221,
+    "renter_share": 0.1917969406622962,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53053",
+    "occupied_units": 351330,
+    "occupied_moe": 1296,
+    "renter_units": 123930,
+    "renter_moe": 2243,
+    "renter_share": 0.35274528221330376,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53055",
+    "occupied_units": 9015,
+    "occupied_moe": 234,
+    "renter_units": 1984,
+    "renter_moe": 155,
+    "renter_share": 0.22007764836383806,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53057",
+    "occupied_units": 52329,
+    "occupied_moe": 421,
+    "renter_units": 15665,
+    "renter_moe": 593,
+    "renter_share": 0.299355997630377,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53059",
+    "occupied_units": 5019,
+    "occupied_moe": 142,
+    "renter_units": 1003,
+    "renter_moe": 140,
+    "renter_share": 0.19984060569834627,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53061",
+    "occupied_units": 316212,
+    "occupied_moe": 1181,
+    "renter_units": 100610,
+    "renter_moe": 1950,
+    "renter_share": 0.3181726183699543,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53063",
+    "occupied_units": 218395,
+    "occupied_moe": 980,
+    "renter_units": 77563,
+    "renter_moe": 1743,
+    "renter_share": 0.35515007211703564,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53065",
+    "occupied_units": 19374,
+    "occupied_moe": 295,
+    "renter_units": 3910,
+    "renter_moe": 413,
+    "renter_share": 0.20181686796737897,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53067",
+    "occupied_units": 118899,
+    "occupied_moe": 801,
+    "renter_units": 38412,
+    "renter_moe": 1278,
+    "renter_share": 0.32306411323896755,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53069",
+    "occupied_units": 2100,
+    "occupied_moe": 114,
+    "renter_units": 353,
+    "renter_moe": 117,
+    "renter_share": 0.1680952380952381,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53071",
+    "occupied_units": 23447,
+    "occupied_moe": 364,
+    "renter_units": 8211,
+    "renter_moe": 595,
+    "renter_share": 0.35019405467650444,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53073",
+    "occupied_units": 94021,
+    "occupied_moe": 718,
+    "renter_units": 34117,
+    "renter_moe": 1130,
+    "renter_share": 0.36286574275959627,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53075",
+    "occupied_units": 18721,
+    "occupied_moe": 472,
+    "renter_units": 9956,
+    "renter_moe": 567,
+    "renter_share": 0.5318091982265905,
+    "acs_vintage": "2020-2024"
+  },
+  {
+    "county_fips": "53077",
+    "occupied_units": 87708,
+    "occupied_moe": 656,
+    "renter_units": 33464,
+    "renter_moe": 1045,
+    "renter_share": 0.38153874218999406,
+    "acs_vintage": "2020-2024"
+  }
+]

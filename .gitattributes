@@ -1,0 +1,4 @@
+# Keep recorded source, input and evidence bytes unchanged across platforms.
+* -text
+# CSV record terminators are retained as CRLF.
+*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

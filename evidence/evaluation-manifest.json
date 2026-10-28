@@ -1,0 +1,9 @@
+{
+  "format": "aner.ev-native-evaluation/1",
+  "analysis_language": "Aner",
+  "run_manifest_sha256": "b42aeddf42a4d4f25faca93837c4c6680a48994c86f2c3630d47b62bd6c2967b",
+  "source_manifest_sha256": "f0c8a489c698bb41df9826ee897a287500ff21f82460d70287983c82940a399d",
+  "verification_sha256": "c8c9f3f4a0a3996cbd2f7360a4c91ae2d2b514dde3e77ebd732aa3b5eedc63cd",
+  "native_output_columns": "docs/output-columns.md",
+  "data_boundary": "curated frozen public CSV inputs; native typed ingestion begins the executable workflow"
+}

@@ -1,0 +1,45 @@
+// Real station coordinates and port counts; no optional map pack is required.
+import aner.data
+import aner.plot
+import aner.geo
+
+var schema = data.schema()
+schema = data.column(schema, "station_id", "String", false)
+schema = data.column(schema, "station_name", "String", false)
+schema = data.column(schema, "latitude", "Float64", false)
+schema = data.column(schema, "longitude", "Float64", false)
+schema = data.column(schema, "l2_ports", "Int64", true)
+schema = data.column(schema, "dc_ports", "Int64", true)
+let stations = data.collect(data.scan_csv("data/stations.csv", schema, "NA"),
+    max_rows: 15000, max_bytes: 4194304, batch_rows: 256)
+print(data.provenance(stations))
+let positions = List()
+let ports = List()
+let labels = List()
+var row = 0
+while row < data.rows(stations) {
+    // Unknown port counts remain missing and are explicitly omitted from this layer.
+    if !data.is_missing(stations, row, "dc_ports") && !data.is_missing(stations, row, "l2_ports") {
+        let total = data.integer(stations, row, "l2_ports") + data.integer(stations, row, "dc_ports")
+        if total > 0 {
+            positions.append(geo.position(longitude: data.number(stations, row, "longitude"),
+                latitude: data.number(stations, row, "latitude")))
+            ports.append(Float64(total))
+            labels.append(data.text(stations, row, "station_name"))
+        }
+    }
+    row += 1
+}
+let chart = plot.geo_scatter(positions: positions, values: ports, labels: labels)
+    .point_sizes(values: ports, max_radius: 7.0)
+    .point_labels("avoid")
+    .extent(west: -124.9, south: 45.4, east: -116.8, north: 49.1)
+    .projection("lambert_azimuthal_equal_area")
+    .size(width: 1000, height: 650)
+    .title("Washington public charging: observed ports")
+    .caption("AFDC snapshot: public sites listed available. Combined L2 and DC counts show inventory, not interchangeable capacity. Unknown counts omitted. Coordinates are not road travel times.")
+chart.save("generated/stations.svg")
+chart.save("generated/stations.html")
+
+// Optional county boundaries: install usa.wa and use five-digit county FIPS keys.
+// plot.map("usa.wa.counties", keys: county_fips, values: pressure).show()

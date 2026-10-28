@@ -1,0 +1,25 @@
+{
+  "source_url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
+  "publisher": "U.S. Census Bureau",
+  "product": "2020-2024 American Community Survey 5-Year Detailed Tables",
+  "table": "B25003 TENURE",
+  "release_date": "2026-01-29",
+  "retrieved_at": "2026-10-28T17:25:48.688443+00:00",
+  "geography": "Washington counties, summary level 050",
+  "filter": "GEO_ID starts with 0500000US53",
+  "row_count": 39,
+  "national_uncompressed_bytes": 26901770,
+  "national_uncompressed_sha256": "68e963e1ed60fcf6b0658579cefc6498b7a9eb780b9f3e87fd1b9775c4d4ac6c",
+  "national_gzip_file": "acsdt5y2024-b25003.dat.gz",
+  "national_gzip_sha256": "d747a136b6dd7de4b8f5a7af15069ab23b0bb4e861cd00bd2b781a9b0f335fa6",
+  "subset_json_file": "acs2024_wa.json",
+  "subset_json_sha256": "5c151b145ee78a001883881ba2967f787f73acb3976d5bb8fb3df9f5d4086b70",
+  "fields": {
+    "B25003_E001": "occupied housing units estimate",
+    "B25003_M001": "occupied housing units margin of error at 90% confidence",
+    "B25003_E003": "renter-occupied housing units estimate",
+    "B25003_M003": "renter-occupied housing units margin of error at 90% confidence",
+    "renter_share": "B25003_E003 / B25003_E001; county-level contextual proxy; not observed absence of home charging"
+  },
+  "limitations": "ACS five-year estimates describe 2020-2024 and do not measure 2026 household charging access. Source margins of error are preserved; no derived ratio margin of error computed."
+}

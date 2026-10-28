@@ -1,0 +1,71 @@
+{
+  "as_of": "2026-10-28",
+  "normalized_at_utc": "2026-10-28T17:33:32.877654+00:00",
+  "sources": [
+    {
+      "file": "dol_monthly.json",
+      "url": "https://data.wa.gov/resource/3d5d-sdqb.json?%24where=state%3D%27WA%27&%24limit=50000&%24order=date%2Ccounty%2Cvehicle_primary_use",
+      "sha256": "f4c726fcdfa99ae07f562957abcdb448c5bd90c6ba706c769f2c163286b57aed",
+      "bytes": 3008063,
+      "retrieved_at_utc": "2026-10-28T17:26:33.405009+00:00"
+    },
+    {
+      "file": "dol_metadata.json",
+      "url": "https://data.wa.gov/api/views/3d5d-sdqb.json",
+      "sha256": "fe29ec273bb0f4d845e92aaf209248056c68917096899216cd7919a4fe0865f3",
+      "bytes": 22189,
+      "retrieved_at_utc": "2026-10-28T17:26:33.405009+00:00"
+    },
+    {
+      "file": "afdc.json",
+      "url": "https://developer.nlr.gov/api/alt-fuel-stations/v1.json?api_key=DEMO_KEY&fuel_type=ELEC&state=WA&access=public&status=E&limit=all",
+      "sha256": "121df9ae194db840a765f4ef4ebce8834202e58352b682b0aa49afcfd6f3494a",
+      "bytes": 10396772,
+      "retrieved_at_utc": "2026-10-28T17:26:33.405009+00:00"
+    },
+    {
+      "file": "census_counties.json",
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query?where=STATE%3D%2753%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CCENTLAT%2CCENTLON&returnGeometry=true&outSR=4326&f=geojson",
+      "sha256": "f05ec8d392757bc3b2c25be78c0215eed20beac8b52976b00c21acd7ed956d60",
+      "bytes": 5266687,
+      "retrieved_at_utc": "2026-10-28T17:26:33.405009+00:00"
+    },
+    {
+      "file": "acsdt5y2024-b25003.dat",
+      "url": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
+      "sha256": "68e963e1ed60fcf6b0658579cefc6498b7a9eb780b9f3e87fd1b9775c4d4ac6c",
+      "bytes": 26901770,
+      "retrieved_at_utc": "2026-10-28T17:26:33.405009+00:00"
+    }
+  ],
+  "coverage": {
+    "counties": 39,
+    "months": 117,
+    "first_month": "2017-01",
+    "last_month": "2026-09",
+    "dol_source_rows": 9126,
+    "county_month_rows": 4563,
+    "station_count": 3225,
+    "l2_ports": 6739,
+    "dc_ports": 2428,
+    "unmatched_station_ids": [],
+    "restricted_access_stations": 48,
+    "acs_vintage": "2020-2024"
+  },
+  "transformations": [
+    "DOL: WA only; BEV+PHEV; sum distinct Passenger and Truck rows by county-month; exclude dates after as_of.",
+    "Join DOL county names to official Census GEOID; require 39 complete consecutive histories.",
+    "AFDC: ELEC/public/E; validate level-specific charging-unit sums against non-null legacy counts.",
+    "Assign station points to official Census county polygons in EPSG:4326; require unique complete matches.",
+    "ACS: renter occupied / all occupied housing units; retain numerator and denominator margins of error.",
+    "Monthly adoption, current charging inventory, and ACS period estimates retain distinct vintages."
+  ],
+  "prepared_sha256": {
+    "data/acs2024_wa.csv": "20cd6cf190aca2bdc8b796ed9d841d3a968cc7b2e3157e29e06625557ed88001",
+    "data/county_context.csv": "fafd8c3b3e7a91753f8750c76bf0694eb37d4dfa138a3273d1b6d783349d642f",
+    "data/ev_monthly.csv": "d8570531ba7ceb95dbfbe839aa9c1b2e2f6d49676e6fd7721b8e5dc43a8ed039",
+    "data/policy_events.csv": "2e33386bfa2b75ad4ecf5644d9e3e566a9e420a2c93fd84568d93381b24458a6",
+    "data/station_county_audit.csv": "30a33f3a111d8b85d5bbd47c2aa73427f200fabefffea468cf94af6beefb9e5c",
+    "data/stations.csv": "76f2637009432d0ba4f28abd74c99a582a772d5a740c34d2906f432b14d33b45"
+  }
+}

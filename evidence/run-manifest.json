@@ -1,0 +1,183 @@
+{
+  "format": "aner.ev-native-run/1",
+  "created_utc": "2026-10-28T18:58:38.918144+00:00",
+  "runtime_version": "Aner 0.0.4",
+  "runtime_binary": "Aner 0.0.4\nTarget: macos-arm64\nCPU optimization: Apple silicon M1-M5 compatible\nCPU profile: compatible\nCPU instruction baseline: apple-m1\nRunning CPU: Apple M2 Max\nBuild configuration: Debug\nLink-time optimization: disabled\nCompiler: AppleClang 21.0.0.21000334\nNumerical CPU backend: Apple Accelerate (runtime CPU dispatch)\nC++ required baseline: C++20\nC++ active language mode: 202002\nC++ standard library: libc++ 220106\nC++20 feature-test observations: __cpp_lib_span=202002 __cpp_lib_bit_cast=201806 __cpp_lib_jthread=201911 __cpp_lib_atomic_wait=201907 __cpp_lib_atomic_ref=201806\nC++26 feature-test observations (current mode; 0=not advertised): __cpp_lib_simd=0 __cpp_lib_inplace_vector=0 __cpp_lib_senders=0 __cpp_impl_reflection=0 __cpp_contracts=0\nC++26 adoption: disabled; observations do not enable features",
+  "runtime_sha256": "2c9a7af315a8594eae8d53a0d673f222a9da82ce502a79251b69d10cf3a9d2f2",
+  "commands": [
+    {
+      "command": [
+        "aner",
+        "--version"
+      ],
+      "seconds": 0.04041370799677679,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "aner",
+        "--binary"
+      ],
+      "seconds": 0.03792062499996973,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "aner",
+        "check",
+        "code/county_priorities.aner",
+        "--strict-declarations"
+      ],
+      "seconds": 0.052946208998037037,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "aner",
+        "check",
+        "code/ev_charging.aner",
+        "--strict-declarations"
+      ],
+      "seconds": 0.047928500003763475,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "aner",
+        "check",
+        "code/maps.aner",
+        "--strict-declarations"
+      ],
+      "seconds": 0.04226333300175611,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "aner",
+        "run",
+        "code/ev_charging.aner",
+        "--max-steps",
+        "50000000"
+      ],
+      "seconds": 21.7690736250006,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "aner",
+        "run",
+        "code/county_priorities.aner",
+        "--max-steps",
+        "50000000"
+      ],
+      "seconds": 2.17884100000083,
+      "returncode": 0
+    },
+    {
+      "command": [
+        "aner",
+        "run",
+        "code/maps.aner",
+        "--max-steps",
+        "50000000"
+      ],
+      "seconds": 0.3884629579988541,
+      "returncode": 0
+    }
+  ],
+  "working_directory": "repository root",
+  "source_sha256": {
+    "code/county_priorities.aner": "721eed3de7b5f4e3e28c837a954434466f5096c3d43b3c8ed9d9b89a7ac9878f",
+    "code/ev_charging.aner": "848a4fd37f8ff3e1e08a4b65a10a8a9f5733fced157884af7577cfafd5827151",
+    "code/ev_charging.anernb": "e55ffd1c9884388e38aa100e86f04a79b907b8d7a97b8f6ca634c10d9d36d229",
+    "code/maps.aner": "68269afd7a9fb12fe73f827dec31ff8ddabdf88c6c63d01a52d3d7495cd64c3a"
+  },
+  "input_sha256": {
+    "data/acs2024_wa.csv": "20cd6cf190aca2bdc8b796ed9d841d3a968cc7b2e3157e29e06625557ed88001",
+    "data/county_context.csv": "fafd8c3b3e7a91753f8750c76bf0694eb37d4dfa138a3273d1b6d783349d642f",
+    "data/ev_monthly.csv": "d8570531ba7ceb95dbfbe839aa9c1b2e2f6d49676e6fd7721b8e5dc43a8ed039",
+    "data/policy_events.csv": "2e33386bfa2b75ad4ecf5644d9e3e566a9e420a2c93fd84568d93381b24458a6",
+    "data/source_manifest.json": "f0c8a489c698bb41df9826ee897a287500ff21f82460d70287983c82940a399d",
+    "data/station_county_audit.csv": "30a33f3a111d8b85d5bbd47c2aa73427f200fabefffea468cf94af6beefb9e5c",
+    "data/stations.csv": "76f2637009432d0ba4f28abd74c99a582a772d5a740c34d2906f432b14d33b45"
+  },
+  "source_manifest_sha256": "f0c8a489c698bb41df9826ee897a287500ff21f82460d70287983c82940a399d",
+  "parameters": {
+    "local_workers": 4,
+    "native_replay_workers": 1,
+    "base_seed": 20261028,
+    "seed_offset": "zero-based sorted county index",
+    "bootstrap_paths_per_county": 1000,
+    "lookback_changes": 24,
+    "block_length": 3,
+    "forecast_horizon_months": 12,
+    "growth_multipliers": [
+      0.75,
+      1,
+      1.25
+    ],
+    "renter_weights": [
+      0,
+      0.25,
+      0.5
+    ]
+  },
+  "output_sha256": {
+    "bootstrap-53001.csv": "0fc53bad995ca8f535bd27c88b8ace80f13b0c312cdc35cad910e6a85b02a76d",
+    "bootstrap-53003.csv": "f2cdd0f82bfba2c78d3b2c9045cf081c5d2089775b81e527b2303754dc5415c6",
+    "bootstrap-53005.csv": "55b62bb4f059dcd53a87cca2c690fba56d8b08ac03ac962e1096aad0b2c867d4",
+    "bootstrap-53007.csv": "fccf569e2e821a07c7cecc7478cbf471ebdba3593cbff75c8f462460f6097a05",
+    "bootstrap-53009.csv": "caca05e11ff6a45e3ce229001f0e76c4a255ed2fb6724b778b9f2cd02badbdac",
+    "bootstrap-53011.csv": "2d836dff17e4469cf782728a804d56a1de38289b2a169d465aefb7f886772c18",
+    "bootstrap-53013.csv": "5cdc65b975c86ab67bacd85c8dbaf3bc651ba5bc60ef8dd5f5d29b6760516630",
+    "bootstrap-53015.csv": "a89e0c3a0df9c38a76146ac8d2cf5981c6b72c602acd67584b1a7f1e76ff040e",
+    "bootstrap-53017.csv": "3dac168ce83e168fdb3156482861adcc01a361f302b4df75b984d52dc199a4f7",
+    "bootstrap-53019.csv": "460b79fe22f322e9f24ec84862f2f320803809cc449e910c50811f57ef7f0976",
+    "bootstrap-53021.csv": "ec99087d44bf630b845abe726f38ea0a00a4794d4691f3f16b278861391ff1ca",
+    "bootstrap-53023.csv": "02fa38703bf8eaf67777f6b8cc96514a33bfe6956a8d640ed6989d0f8c7d39ea",
+    "bootstrap-53025.csv": "e7d7b22adadfd78f6b86dfa8bff7bf3e741ababd03e8b9d4c8aab5633961fb05",
+    "bootstrap-53027.csv": "8c14f21f59667b66d268c5f5bb921bea2afd996dc158dae62d8202152e513227",
+    "bootstrap-53029.csv": "3b9b595fddd26a42ca7b6921ba02d54270974fb44845715f3b4f1db63496c61d",
+    "bootstrap-53031.csv": "6e446a7c4c68754f06db1a5dba9ab18b8263b9c883e1c19f48b467cbc6b3000b",
+    "bootstrap-53033.csv": "5921789f54e49c38f176d310cba4ac8cd57a1d6c94dba8aa03d218fe93f49763",
+    "bootstrap-53035.csv": "16d6afd0c6044eaa28beb410d5de52830a268b96c25172d389de0bd2eda3c14f",
+    "bootstrap-53037.csv": "8d24a1b0a1567bb042037c4e115be461405be91e4b7ad38005bf8b8d6b3d1fcc",
+    "bootstrap-53039.csv": "45a94b4e6f796c7d3c46aa3e0f276138432378e2df2598c4dacab165fbf4ef10",
+    "bootstrap-53041.csv": "a4d61131ed8232a48f8c87efd0c29f3e41a341e0a6b0b30d4c803263f2dfaeab",
+    "bootstrap-53043.csv": "7c328a7a80a64a97e3be52f35fafe396531bee373b97a5907e33ebeb851bdff4",
+    "bootstrap-53045.csv": "891a213fb9a893353652043d6a68a8b32d3d1e05da2455df151060146da23fa6",
+    "bootstrap-53047.csv": "baca736f2e13163cf894168869e46772c1c4b96eb82985f98a5b152d52bee590",
+    "bootstrap-53049.csv": "32f24e86ff019a6c481ee3c6368493f84b59424dbd9c01bdda0f9f9253eb2b09",
+    "bootstrap-53051.csv": "ac2a1a6751cf7a92b92eab227f48b1ba0de531711cd94b8b4c8b5885c2f9556e",
+    "bootstrap-53053.csv": "77d6bdc4ed403dd1dae0dc9612dfb460d3bf8c1d20d07d248856ec8638917106",
+    "bootstrap-53055.csv": "93c795125712915aa0a3d39cfbf82a2e45b099df2212a187be0d64b5809d58fa",
+    "bootstrap-53057.csv": "e4414a1729b96fe2b0c894006c82b61bb86816eb4e8d92c6c33845a7086ae763",
+    "bootstrap-53059.csv": "fe83b740e0ef38158db0854c22aec900d6244eb3e826eb9ad36cbef0c94e834f",
+    "bootstrap-53061.csv": "b2506c7711e96511d28f9d0f0396e4302bd14d8395b2e91302f378ef911f913f",
+    "bootstrap-53063.csv": "3add9765d460ed9725b90d5e5bd4fa3025a42a0be6bc44f1d0bf40a738637439",
+    "bootstrap-53065.csv": "20cc0ea1727cf33445982be4b0c479f37819fbee51fd3fa3e9b89c7da75eefc6",
+    "bootstrap-53067.csv": "8750068b7bb5ffc79c6740798a18157724224b9497b65e24c9dd3826e62b3782",
+    "bootstrap-53069.csv": "3d378e461c0ee82c14ad074f5e1730acfb4e07c6bff5cd380f5dc40e8a09bc3d",
+    "bootstrap-53071.csv": "204b6a05f6f4b055ebe52f58e95dc1ca975ff43efed6aa606d73814390bdae52",
+    "bootstrap-53073.csv": "6902e9d0a799b2180227ed8e39c9e0b0f874d84a5e1e995f8677eff20fa0b4d2",
+    "bootstrap-53075.csv": "1ab0baf831ca972f3545acef6282d000a793ad5058fc011346a5efaff541ab20",
+    "bootstrap-53077.csv": "12d71475a76143da56fb18c2f5f01d0fc0bf68d03439ee4a4d489bc627a5d259",
+    "county-forecasts.csv": "c61134aa0bb2ba8eaa48257e91f2a1104ea8ae2cd65c74bd521bcde6c1a3dbfa",
+    "county-priorities.csv": "dbb8809054c20ba915ba85279f9ea99f45355c8c125ea35e2338757bc0b80104",
+    "county_priorities-check.log": "a12b7cb43c9d9134b5bb1b35e9096b66775d9e92e7611d1cc92b02edd6782a87",
+    "county_priorities.csv": "d01d33d884eba971146ab4adc77a15004f50de2b9347c54a491e323d0183158b",
+    "county_results.csv": "fa6a7d5295a9aea586be00fb526a258ad11642d8214f9874511074492ef2188b",
+    "decision_trace.csv": "d698db434a6c99c9e302144b7833d857de529fb4c8829d20693d83db8817a556",
+    "ev_charging-check.log": "a12b7cb43c9d9134b5bb1b35e9096b66775d9e92e7611d1cc92b02edd6782a87",
+    "forecast.log": "35048ed94569a4cdb06945f8b4f0dd0914c95283a83e05b8cf6e2e7afee05c19",
+    "maps-check.log": "a12b7cb43c9d9134b5bb1b35e9096b66775d9e92e7611d1cc92b02edd6782a87",
+    "maps.log": "5d1cb6f049ed6d66ee4352056bbee1256ee601529cb456463c1130450210b812",
+    "priorities.log": "e23248bccf0ddd8afeb7d5b82ce588f8c2514c32bfc759493f016e36efe459ca",
+    "runtime-binary.txt": "7b8b4505832f676d600cc3a17e02e0ab3d0a12c57d7d361f987ce4a0914b4cff",
+    "runtime-version.txt": "021ab95cc5446cc500d2ab386170c9dbad7d6d07a2fa9a17a08e5df8faaee720",
+    "scenario-ranks.csv": "2fd987fbf173e543adaabc187e6b8627c7327f19a3831818b5906c6975b560ae",
+    "scenario_ranks.csv": "b4bdbfa80e97b152b349547a41e7b7288f7550d9f160c6e84007a42012c41775",
+    "stations.svg": "b3e968d3ad00bb1e86813d756feef12338437e25409454ae8003063fddfc404f",
+    "verification.json": "c8c9f3f4a0a3996cbd2f7360a4c91ae2d2b514dde3e77ebd732aa3b5eedc63cd"
+  }
+}
